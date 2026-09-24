@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Script AI App Builder</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+
+body{
+ background:#080808;
+ color:#fff;
+ min-height:100vh;
+}
+
+header{
+ height:65px;
+ border-bottom:1px solid #222;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 20px;
+}
+
+.logo{
+ font-size:25px;
+ font-weight:bold;
+}
+
+.badge{
+ background:#171717;
+ border:1px solid #333;
+ padding:8px 12px;
+ border-radius:20px;
+ font-size:13px;
+}
+
+main{
+ max-width:1000px;
+ margin:auto;
+ padding:45px 18px;
+}
+
+.hero{
+ text-align:center;
+ margin-bottom:30px;
+}
+
+.hero h1{
+ font-size:42px;
+ margin-bottom:12px;
+}
+
+.hero p{
+ color:#999;
+}
+
+.builder{
+ background:#111;
+ border:1px solid #292929;
+ border-radius:18px;
+ padding:20px;
+}
+
+textarea{
+ width:100%;
+ min-height:160px;
+ background:#080808;
+ color:white;
+ border:1px solid #333;
+ border-radius:12px;
+ padding:15px;
+ font-size:16px;
+ outline:none;
+ resize:vertical;
+}
+
+textarea:focus{
+ border-color:#777;
+}
+
+.controls{
+ display:flex;
+ gap:10px;
+ margin-top:15px;
+}
+
+select,button{
+ padding:13px 16px;
+ border-radius:10px;
+ border:1px solid #333;
+ font-size:15px;
+}
+
+select{
+ background:#181818;
+ color:white;
+}
+
+button{
+ background:white;
+ color:black;
+ font-weight:bold;
+ flex:1;
+ cursor:pointer;
+}
+
+.status{
+ margin-top:20px;
+ padding:15px;
+ background:#0b0b0b;
+ border-radius:12px;
+ color:#aaa;
+}
+
+.preview{
+ margin-top:20px;
+ min-height:220px;
+ border:1px dashed #333;
+ border-radius:12px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:20px;
+ color:#777;
+}
+
+@media(max-width:600px){
+ .hero h1{font-size:32px}
+ .controls{flex-direction:column}
+ select,button{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">Script</div>
+<div class="badge">AI App Builder</div>
+</header>
+
+<main>
+
+<div class="hero">
+<h1>Build Apps With AI</h1>
+<p>Describe your app. Script will build it.</p>
+</div>
+
+<div class="builder">
+
+<textarea id="prompt"
+placeholder="Example: Create a food delivery app with login, restaurant list, cart and order tracking..."></textarea>
+
+<div class="controls">
+
+<select id="provider">
+<option value="auto">Auto</option>
+<option value="openai">OpenAI</option>
+<option value="gemini">Gemini</option>
+<option value="both">OpenAI + Gemini</option>
+</select>
+
+<button onclick="buildApp()">🚀 Build App</button>
+
+</div>
+
+<div class="status" id="status">
+Ready to build your app.
+</div>
+
+<div class="preview" id="preview">
+Your generated app preview will appear here.
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+function buildApp(){
+
+const prompt=document.getElementById("prompt").value;
+const provider=document.getElementById("provider").value;
+
+const status=document.getElementById("status");
+const preview=document.getElementById("preview");
+
+if(!prompt.trim()){
+status.innerText="⚠️ Please describe the app you want to build.";
+return;
+}
+
+status.innerText="🚀 Script is preparing your app...";
+
+setTimeout(()=>{
+
+status.innerText=
+"🤖 AI Provider: "+provider+
+" | Prompt received successfully.";
+
+preview.innerHTML=
+"<div>"+
+"<h2>🚀 Script AI Builder</h2>"+
+"<p style='margin-top:12px;color:#999'>"+
+"Your app request has been received.<br><br>"+
+"<b>Requested:</b><br>"+
+prompt+
+"</p>"+
+"</div>";
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>
